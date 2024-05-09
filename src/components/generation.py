@@ -5,7 +5,7 @@ from config.constants import *
 from config.config import *
 from config.utils import *
 
-def generator(question: str, langchain_api_key: str, google_api_key: str) -> str:
+def generator(question: str, history: str, langchain_api_key: str, google_api_key: str) -> str:
   '''Generates a response to the user's input, based on context, using the Gemini model.'''
   
   os.environ['LANGCHAIN_TRACING_V2'] = 'true'
@@ -31,8 +31,17 @@ def generator(question: str, langchain_api_key: str, google_api_key: str) -> str
     temperature=0.75
   )
   
+  class ConcatenateHistory:
+    '''Makes history callable.'''
+    
+    def __init__(self, history: str):
+      self.history = history
+
+    def __call__(self, *args, **kwargs):
+      return history
+  
   chain = RunnableSequence(
-    {'context': retriever, 'question': RunnablePassthrough()}
+    {'context': retriever, 'history': ConcatenateHistory(history), 'question': RunnablePassthrough()}
     | prompt
     | llm
     | StrOutputParser()

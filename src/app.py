@@ -51,7 +51,12 @@ if input_ := st.chat_input('Ready to dive today?'):
       'content': input_
     })  
     
-    response = generator(input_, langchain_api_key=settings.LANGSMITH_API_KEY, google_api_key=settings.GEMINI_API_KEY)
+    response = generator(
+      question=input_,
+      history='\n'.join(f"{item['role']}: {item['content']}" for item in st.session_state.messages),
+      langchain_api_key=settings.LANGSMITH_API_KEY, 
+      google_api_key=settings.GEMINI_API_KEY
+    )
     
     with st.chat_message('assistant'):
       st.markdown(response)

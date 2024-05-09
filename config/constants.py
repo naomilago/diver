@@ -46,6 +46,9 @@ DATA_PROCESSING = {
 
     {context}
 
+    If you need conversational context, here is the history of the conversation:
+    
+    {history}
 
     User Question: {question}
   '''
