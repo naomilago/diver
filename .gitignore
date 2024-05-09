@@ -1,0 +1,4 @@
+# Hiding secrets
+
+config/.secrets.json
+keys.json

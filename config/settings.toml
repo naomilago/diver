@@ -1,0 +1,8 @@
+[people.developer]
+name = 'Naomi Lago'
+role = 'Data Scientist'
+
+[project]
+name = 'Diver'
+description = "Welcome to the Diver code! This is a project of a chatbot, my assistent to answer user related questions about my blog."
+release = 2024
