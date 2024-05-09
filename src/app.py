@@ -1,4 +1,14 @@
+# Setting up
+
+import sys
+sys.path.append('D:/Deep Learning/Diver')
+
+from src.components.generation import generator
+from config.utils import *
+
 import streamlit as st
+
+# Initial welcoming messages
 
 st.set_page_config(
     page_title='Diver - diving data with AI',
@@ -18,6 +28,8 @@ with github:
   st.link_button("Saber mais sobre mim no Github", "https://github.com/naomilago/diver")
 
 st.divider()
+
+# Chatbot
 
 if 'messages' not in st.session_state:
   st.session_state.messages = []
@@ -39,7 +51,7 @@ if input_ := st.chat_input('Ready to dive today?'):
       'content': input_
     })  
     
-    response = f'This is a bot\'s response!'
+    response = generator(input_, langchain_api_key=settings.LANGSMITH_API_KEY, google_api_key=settings.GEMINI_API_KEY)
     
     with st.chat_message('assistant'):
       st.markdown(response)
