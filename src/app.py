@@ -15,17 +15,19 @@ st.set_page_config(
     page_icon='src/assets/favicon.svg',
 )
 
-st.title("Olá,")
+st.title('Olá,')
 
-st.markdown("Eu sou o Diver, um chatbot alimentado por inteligência artificial. Vou te ajudar com suas perguntas sobre o blog da [Naomi Lago](https://naomilago.com/)! Uma coisa legal sobre mim é que sou poliglota, então podemos conversar no idioma em que você se sentir mais confortável :)")
-st.markdown("Ah, e caso goste de mim, que tal se conectar com a própria Naomi Lago?")
+st.markdown('Eu sou Diver, chatbot alimentado por inteligência artificial. Vou te ajudar com suas perguntas sobre o blog da [Naomi Lago](https://naomilago.com/)! Uma coisa legal sobre mim é que sou poliglota, então podemos conversar no idioma em que você se sentir mais confortável :)')
+st.markdown('Ah, e caso goste de mim, que tal se conectar com a própria Naomi Lago?')
 
-linkedin, github = st.columns([0.25, 0.55])
+linkedin, github, session = st.columns([0.35, 0.55, 0.25])
 
 with linkedin:
-  st.link_button("Se conectar no Linkedin", "https://www.linkedin.com/in/naomilago/")
+  st.link_button('Se conectar no Linkedin', 'https://www.linkedin.com/in/naomilago/')
 with github:
-  st.link_button("Saber mais sobre mim no Github", "https://github.com/naomilago/diver")
+  st.link_button('Saber mais sobre mim no Github', 'https://github.com/naomilago/diver')
+with session:
+  st.button('Limpar sessão', on_click=lambda: st.session_state.pop('messages', None))
 
 st.divider()
 
@@ -53,7 +55,7 @@ if input_ := st.chat_input('Ready to dive today?'):
     
     response = generator(
       question=input_,
-      history='\n'.join(f"{item['role']}: {item['content']}" for item in st.session_state.messages),
+      history='\n'.join(f'{item["role"]}: {item["content"]}' for item in st.session_state.messages),
       langchain_api_key=settings.LANGSMITH_API_KEY, 
       google_api_key=settings.GEMINI_API_KEY
     )
