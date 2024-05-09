@@ -38,8 +38,9 @@
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=Diver+Screenshot)
-![App Screenshot](https://via.placeholder.com/468x300?text=Diver+Screenshot)
+![App Screenshot](./src/assets/first_demonstration.png)
+![App Screenshot](./src/assets/second_demonstration.png)
+![App Screenshot](./src/assets/third_demonstration.png)
 
 <br>
 
@@ -80,4 +81,3 @@ Start the server
 ```bash
   python -m streamlit run src/app.py
 ```
-
